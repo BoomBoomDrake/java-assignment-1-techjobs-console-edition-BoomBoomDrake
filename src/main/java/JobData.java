@@ -53,8 +53,10 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
+        ArrayList<HashMap<String, String>> allJobsCopy = new ArrayList<>(allJobs);
+
         // Bonus mission; normal version returns allJobs
-        return new ArrayList<>(allJobs);
+        return new ArrayList<>(allJobsCopy);
     }
 
     /**
@@ -77,9 +79,9 @@ public class JobData {
 
         for (HashMap<String, String> row : allJobs) {
 
-            String aValue = row.get(column);
+            String aValue = row.get(column).toLowerCase();
 
-            if (aValue.contains(value)) {
+            if (aValue.contains(value.toLowerCase())) {
                 jobs.add(row);
             }
         }
@@ -104,7 +106,7 @@ public class JobData {
         for (HashMap<String, String> row : allJobs) {
 
             for (String key : row.keySet()) {
-                if (row.get(key).contains(value) && !jobs.contains(row)) {
+                if (row.get(key).toLowerCase().contains(value.toLowerCase()) && !jobs.contains(row)) {
                     jobs.add(row);
                 }
             }
